@@ -47,7 +47,15 @@ public class Services {
 		json.put("long", user.getLon());
 		return json.toJSONString();
 	}
-
+	@POST
+	@Path("/follow")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String follow(@FormParam("id1") int id1,
+			@FormParam("id2") int id2) {
+		UserModel follow = UserModel.follow(id1, id2);		
+	   return null;
+	}
+	
 	@POST
 	@Path("/login")
 	@Produces(MediaType.TEXT_PLAIN)
