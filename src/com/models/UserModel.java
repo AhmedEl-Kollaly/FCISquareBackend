@@ -114,6 +114,26 @@ public class UserModel {
 		return null;
 	}
 	
+	
+	public static UserModel unfollow(int id1, int id2)
+	{
+		try {
+			Connection conn = DBConnection.getActiveConnection();
+			String sql = "DELETE FROM  `follow` WHERE `id1` =? AND `id2` =?";
+			PreparedStatement stmt;
+			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			stmt.setInt(1, id1);
+			stmt.setInt(2, id2);
+			stmt.executeUpdate();
+			return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
 	public static UserModel login(String email, String pass) {
 		try {
 			Connection conn = DBConnection.getActiveConnection();
