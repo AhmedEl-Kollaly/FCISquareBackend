@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -15,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.server.mvc.Viewable;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.models.DBConnection;
@@ -110,4 +112,17 @@ public class Services {
 		// Connection URL:
 		// mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/
 	}
+   @POST
+   @Path("/getFollowingList")
+	@Produces(MediaType.TEXT_PLAIN)
+   public String getFollowingList(@FormParam("id") int id){
+	   ArrayList<Integer> followingList = new ArrayList<Integer>(UserModel.getFollowingList(id));
+	  JSONObject json = new JSONObject();
+	   for(int i= 0 ;i<followingList.size();++i){
+		   json.put(" id"+i, followingList.get(i));
+			
+	   }
+	  
+	   return json.toJSONString();
+   }
 }
