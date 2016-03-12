@@ -1,9 +1,11 @@
 package com.models;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.mysql.jdbc.Statement;
 
@@ -202,6 +204,32 @@ public static UserModel getLastPosition(String email) {
 		
 		return null;
 	}
+public static ArrayList<Integer> getFollowingList(int id){
+	
+	// TODO Auto-generated method stub
+			try {
+				Connection conn = DBConnection.getActiveConnection();
+				String sql = "Select * from follow where `id1` = ?";
+				PreparedStatement stmt;
+				stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, id);
+				ResultSet rs = stmt.executeQuery();
+				ArrayList<Integer> following = new  ArrayList<>();
+				while(rs.next()) {
+					UserModel user = new UserModel();
+					user.id = rs.getInt("id2");
+		
+					following.add(user.id);
+				}
+				return following;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return null;
+	
+}
 
 
 }
