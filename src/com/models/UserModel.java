@@ -177,5 +177,31 @@ public class UserModel {
 		}
 		return false;
 	}
+public static UserModel getLastPosition(String email) {
+		
+		// TODO Auto-generated method stub
+		try {
+			Connection conn = DBConnection.getActiveConnection();
+			String sql = "Select * from users where `email` = ?";
+			PreparedStatement stmt;
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, email);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				UserModel user = new UserModel();
+				user.email = rs.getString("email");
+				user.lat = rs.getDouble("lat");
+				user.lon = rs.getDouble("long");
+				return user;
+			}
+			return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
 
 }
