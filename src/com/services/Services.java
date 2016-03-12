@@ -92,7 +92,16 @@ public class Services {
 		json.put("status", status ? 1 : 0);
 		return json.toJSONString();
 	}
-
+	@POST
+	@Path("/getLastPosition")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String getLastPosition(@FormParam("email") String email){
+		UserModel user= UserModel.getLastPosition(email);
+		JSONObject json = new JSONObject();
+		json.put("lat", user.getLat());
+		json.put("long", user.getLon());
+		return json.toJSONString();
+		}
 	@GET
 	@Path("/")
 	@Produces(MediaType.TEXT_PLAIN)
