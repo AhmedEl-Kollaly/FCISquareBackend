@@ -27,9 +27,9 @@ public class Services {
 
 	/*
 	 * @GET
-	 * 
+	 *
 	 * @Path("/signup")
-	 * 
+	 *
 	 * @Produces(MediaType.TEXT_HTML) public Response signUp(){ return
 	 * Response.ok(new Viewable("/Signup.jsp")).build(); }
 	 */
@@ -49,25 +49,29 @@ public class Services {
 		json.put("long", user.getLon());
 		return json.toJSONString();
 	}
-	
+
 	@POST
 	@Path("/follow")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String follow(@FormParam("id1") int id1,
+	public boolean follow(@FormParam("id1") int id1,
 			@FormParam("id2") int id2) {
 		UserModel follow = UserModel.follow(id1, id2);
-	   return null;
+	 	JSONObject json = new JSONObject();
+		json.put("id2", id2);
+	    return json.toJSONString();
 	}
-	
+
 	@POST
 	@Path("/unfollow")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String unfollow(@FormParam("id1") int id1,
+	public boolean unfollow(@FormParam("id1") int id1,
 			@FormParam("id2") int id2) {
 		UserModel unfollow = UserModel.unfollow(id1, id2);
-	   return null;
+		JSONObject json = new JSONObject();
+		json.put("id2", id2);
+	   return json.toJSONString();
 	}
-	
+
 	@POST
 	@Path("/login")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -83,7 +87,7 @@ public class Services {
 		json.put("long", user.getLon());
 		return json.toJSONString();
 	}
-	
+
 	@POST
 	@Path("/updatePosition")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -120,9 +124,9 @@ public class Services {
 	  JSONObject json = new JSONObject();
 	   for(int i= 0 ;i<followingList.size();++i){
 		   json.put(" id"+i, followingList.get(i));
-			
+
 	   }
-	  
+
 	   return json.toJSONString();
    }
 }
