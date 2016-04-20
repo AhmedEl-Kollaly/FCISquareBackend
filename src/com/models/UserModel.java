@@ -66,7 +66,31 @@ public class UserModel {
 	public void setLon(Double lon) {
 		this.lon = lon;
 	}
-
+	public static UserModel getUserInfo(int id){
+		try {
+			Connection conn = DBConnection.getActiveConnection();
+			String sql = "Select * from users where `id` = ?";
+			PreparedStatement stmt;
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				UserModel user = new UserModel();
+				user.id = rs.getInt(1);
+				user.email = rs.getString("email");
+				user.pass = rs.getString("password");
+				user.name = rs.getString("name");
+				user.lat = rs.getDouble("lat");
+				user.lon = rs.getDouble("long");
+				return user;
+			}
+			return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	public static UserModel addNewUser(String name, String email, String pass) {
 		try {
 			Connection conn = DBConnection.getActiveConnection();
@@ -204,7 +228,7 @@ public static UserModel getLastPosition(String email) {
 		
 		return null;
 	}
-public static ArrayList<Integer> getFollowingList(int id){
+public static ArrayList<UserModel> getFollowingList(int id){
 	
 	// TODO Auto-generated method stub
 			try {
@@ -214,12 +238,10 @@ public static ArrayList<Integer> getFollowingList(int id){
 				stmt = conn.prepareStatement(sql);
 				stmt.setInt(1, id);
 				ResultSet rs = stmt.executeQuery();
-				ArrayList<Integer> following = new  ArrayList<>();
+				ArrayList<UserModel> following = new  ArrayList<>();
 				while(rs.next()) {
-					UserModel user = new UserModel();
-					user.id = rs.getInt("id2");
-		
-					following.add(user.id);
+					
+					following.add(getUserInfo(rs.getInt("id2")));
 				}
 				return following;
 			} catch (SQLException e) {

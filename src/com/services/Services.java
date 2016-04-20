@@ -27,9 +27,9 @@ public class Services {
 
 	/*
 	 * @GET
-	 *
+	 * 
 	 * @Path("/signup")
-	 *
+	 * 
 	 * @Produces(MediaType.TEXT_HTML) public Response signUp(){ return
 	 * Response.ok(new Viewable("/Signup.jsp")).build(); }
 	 */
@@ -49,29 +49,25 @@ public class Services {
 		json.put("long", user.getLon());
 		return json.toJSONString();
 	}
-
+	
 	@POST
 	@Path("/follow")
 	@Produces(MediaType.TEXT_PLAIN)
-	public boolean follow(@FormParam("id1") int id1,
+	public String follow(@FormParam("id1") int id1,
 			@FormParam("id2") int id2) {
 		UserModel follow = UserModel.follow(id1, id2);
-	 	JSONObject json = new JSONObject();
-		json.put("id2", id2);
-	    return json.toJSONString();
+	   return null;
 	}
-
+	
 	@POST
 	@Path("/unfollow")
 	@Produces(MediaType.TEXT_PLAIN)
-	public boolean unfollow(@FormParam("id1") int id1,
+	public String unfollow(@FormParam("id1") int id1,
 			@FormParam("id2") int id2) {
 		UserModel unfollow = UserModel.unfollow(id1, id2);
-		JSONObject json = new JSONObject();
-		json.put("id2", id2);
-	   return json.toJSONString();
+	   return null;
 	}
-
+	
 	@POST
 	@Path("/login")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -87,7 +83,7 @@ public class Services {
 		json.put("long", user.getLon());
 		return json.toJSONString();
 	}
-
+	
 	@POST
 	@Path("/updatePosition")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -120,13 +116,18 @@ public class Services {
    @Path("/getFollowingList")
 	@Produces(MediaType.TEXT_PLAIN)
    public String getFollowingList(@FormParam("id") int id){
-	   ArrayList<Integer> followingList = new ArrayList<Integer>(UserModel.getFollowingList(id));
+	   ArrayList<UserModel> followingList = new ArrayList<UserModel>(UserModel.getFollowingList(id));
 	  JSONObject json = new JSONObject();
 	   for(int i= 0 ;i<followingList.size();++i){
-		   json.put(" id"+i, followingList.get(i));
 
+		   json.put("id"+i+": ", followingList.get(i).getId());
+			json.put("name"+i+": ", followingList.get(i).getName());
+			json.put("email"+i+": ", followingList.get(i).getEmail());
+			json.put("lat"+i+": ", followingList.get(i).getLat());
+			json.put("long"+i+": ", followingList.get(i).getLon());
+			
 	   }
-
+	  
 	   return json.toJSONString();
    }
 }
