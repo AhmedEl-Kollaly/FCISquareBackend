@@ -12,11 +12,13 @@ public class DBConnection {
 		String port = System.getenv("OPENSHIFT_MYSQL_DB_PORT");
 		System.out.println(host);*/
 		try {
+			
+		
 			Class.forName("com.mysql.jdbc.Driver");
-			//connection = DriverManager
-			//		.getConnection("jdbc:mysql://127.8.100.2:3306/se2firstapp?"
-			//				+ "user=adminYKFs38v&password=QG9RmdNVFgmc&characterEncoding=utf8");
-			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/se2firstapp", "root", "");
+			connection = DriverManager
+					.getConnection("jdbc:mysql://127.9.25.130:3306/firstapp?"
+							+ "user=admin6SCMghN&password=jW1f8BU3jtPN&characterEncoding=utf8");
+		//	connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/se2firstapp", "root", "");
 			return connection;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

@@ -116,10 +116,15 @@ public class Services {
    @Path("/getFollowingList")
 	@Produces(MediaType.TEXT_PLAIN)
    public String getFollowingList(@FormParam("id") int id){
-	   ArrayList<Integer> followingList = new ArrayList<Integer>(UserModel.getFollowingList(id));
+	   ArrayList<UserModel> followingList = new ArrayList<UserModel>(UserModel.getFollowingList(id));
 	  JSONObject json = new JSONObject();
 	   for(int i= 0 ;i<followingList.size();++i){
-		   json.put(" id"+i, followingList.get(i));
+
+		   json.put("id"+i+": ", followingList.get(i).getId());
+			json.put("name"+i+": ", followingList.get(i).getName());
+			json.put("email"+i+": ", followingList.get(i).getEmail());
+			json.put("lat"+i+": ", followingList.get(i).getLat());
+			json.put("long"+i+": ", followingList.get(i).getLon());
 			
 	   }
 	  
