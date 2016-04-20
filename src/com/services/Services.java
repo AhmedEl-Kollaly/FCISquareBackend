@@ -38,8 +38,10 @@ public class Services {
 	@Path("/signup")
 	@Produces(MediaType.TEXT_PLAIN)
 	public String signUp(@FormParam("name") String name,
-			@FormParam("email") String email, @FormParam("pass") String pass) {
-		UserModel user = UserModel.addNewUser(name, email, pass);
+			@FormParam("email") String email, @FormParam("pass") String pass, 
+			   @FormParam("question") String question, @FormParam("answer") String answer,
+			      @FormParam("prem") String prem) {
+		UserModel user = UserModel.addNewUser(name, email, pass, question, answer, prem);
 		JSONObject json = new JSONObject();
 		json.put("id", user.getId());
 		json.put("name", user.getName());
@@ -47,6 +49,24 @@ public class Services {
 		json.put("pass", user.getPass());
 		json.put("lat", user.getLat());
 		json.put("long", user.getLon());
+		json.put("prem", user.getPrem());
+		return json.toJSONString();
+	}
+	
+	@POST
+	@Path("/forgetpassword")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String forgetpassword( @FormParam("question") String question
+			,@FormParam("answer") String answer) {
+		UserModel user = UserModel.forgetpassword(question, answer);
+		JSONObject json = new JSONObject();
+		json.put("id", user.getId());
+		json.put("name", user.getName());
+		json.put("email", user.getEmail());
+		json.put("pass", user.getPass());
+		json.put("lat", user.getLat());
+		json.put("long", user.getLon());
+		json.put("prem", user.getPrem());
 		return json.toJSONString();
 	}
 	
@@ -75,13 +95,29 @@ public class Services {
 			@FormParam("pass") String pass) {
 		UserModel user = UserModel.login(email, pass);
 		JSONObject json = new JSONObject();
+		if(user!=null)
+		{
+			
 		json.put("id", user.getId());
 		json.put("name", user.getName());
 		json.put("email", user.getEmail());
 		json.put("pass", user.getPass());
 		json.put("lat", user.getLat());
 		json.put("long", user.getLon());
+		json.put("prem", user.getPrem());
 		return json.toJSONString();
+		}
+		else
+		{
+			json.put("id", "-1");
+			json.put("name", "-1");
+			json.put("email", "-1");
+			json.put("pass", "-1");
+			json.put("lat", "-1");
+			json.put("long", "-1");
+			json.put("prem", "no");
+			return json.toJSONString();
+		}
 	}
 	
 	@POST
