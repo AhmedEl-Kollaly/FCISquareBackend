@@ -19,6 +19,7 @@ import org.glassfish.jersey.server.mvc.Viewable;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.application.String;
 import com.models.DBConnection;
 import com.models.UserModel;
 
@@ -33,7 +34,23 @@ public class Services {
 	 * @Produces(MediaType.TEXT_HTML) public Response signUp(){ return
 	 * Response.ok(new Viewable("/Signup.jsp")).build(); }
 	 */
-
+	@POST
+	@Path("/checkin")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String signUp(@FormParam("id") int  id,
+			@FormParam("lat") String lat, @FormParam("long") String lon) {
+		Integer user = UserModel.getPlaces(id,lat,lon);
+		JSONObject json = new JSONObject();
+		json.put("id", user.getId());
+		json.put("name", user.getName());
+		json.put("email", user.getEmail());
+		json.put("pass", user.getPass());
+		json.put("lat", user.getLat());
+		json.put("long", user.getLon());
+		json.put("prem", user.getPrem());
+		return json.toJSONString();
+	}
+	
 	@POST
 	@Path("/signup")
 	@Produces(MediaType.TEXT_PLAIN)

@@ -299,5 +299,58 @@ public void setPrem(String prem) {
 	this.prem = prem;
 }
 
+public static Integer getPlaces(int id,String lat, String lon) 
+{
+	double ladouble=Double.parseDouble(lat);
+	double londouble=Double.parseDouble(lon);
+	double mindist = 0;
+	int minid = 0;
+	double dist;
+	// TODO Auto-generated method stub
+				try {
+					Connection conn = DBConnection.getActiveConnection();
+					String sql = "Select * from places ";
+					PreparedStatement stmt;
+					stmt = conn.prepareStatement(sql);
+
+					ResultSet rs = stmt.executeQuery();
+					ArrayList<UserModel> following = new  ArrayList<>();
+					int i=0;
+					while(rs.next()) 
+					{
+						double lat2 = rs.getDouble("lat");
+						double long2 = rs.getDouble("long");	
+						int id =rs.getInt("id");
+					
+						
+						 dist=DistanceCalculator.distance(ladouble,londouble,lat2,long2);
+						
+						if(dist<mindist||i==0)
+						{
+							mindist=dist;
+							minid=id;
+						}
+						i++;
+						
+					}
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				/*
+				 *  yourID is 
+				 * 
+				 * 
+				 */
+		
+	
+	
+	return minid;
+
+
+}
+
 
 }
