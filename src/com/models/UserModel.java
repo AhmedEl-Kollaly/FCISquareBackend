@@ -299,7 +299,7 @@ public void setPrem(String prem) {
 	this.prem = prem;
 }
 
-public static Integer getPlaces(int id,String lat, String lon) 
+public static UserModel getPlaces(int id1,String lat, String lon) 
 {
 	double ladouble=Double.parseDouble(lat);
 	double londouble=Double.parseDouble(lon);
@@ -338,16 +338,41 @@ public static Integer getPlaces(int id,String lat, String lon)
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				try{
+				Connection conn = DBConnection.getActiveConnection();
+				String sql = "UPDATE `places` SET `numofcheckins`=numofcheckins+1 WHERE  `id`=?";
+				PreparedStatement stmt;
+				stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, minid);
+				ResultSet rs = stmt.executeQuery();
 				
-				/*
-				 *  yourID is 
-				 * 
-				 * 
-				 */
-		
-	
-	
-	return minid;
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				try{
+					Connection conn = DBConnection.getActiveConnection();
+					String sql = "INSERT INTO `checkin`(`place_id`, `user_id`) VALUES (?,?)";
+					PreparedStatement stmt;
+					stmt = conn.prepareStatement(sql);
+					stmt.setInt(1, minid);
+					stmt.setInt(1, id1);
+					ResultSet rs = stmt.executeQuery();
+					UserModel user = new UserModel();
+					user.id = rs.getInt(1);
+					user.email = rs.getString("email");
+					user.pass = rs.getString("password");
+					user.name = rs.getString("name");
+					user.lat = rs.getDouble("lat");
+					user.lon = rs.getDouble("long");
+					return user;
+					}
+				catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}	 
+	return null;
 
 
 }
