@@ -19,7 +19,7 @@ import org.glassfish.jersey.server.mvc.Viewable;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.application.String;
+
 import com.models.DBConnection;
 import com.models.UserModel;
 
@@ -37,16 +37,40 @@ public class Services {
 	@POST
 	@Path("/checkin")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String signUp(@FormParam("id") int  id,
-			@FormParam("lat") String lat, @FormParam("long") String lon) {
-		UserModel user = UserModel.getPlaces(id, lat, lon);
+	public String checkin(@FormParam("id") int  id,
+			@FormParam("lat") String lat, @FormParam("long") String lon) throws SQLException {
+		int id2 = UserModel.getPlaces(id, lat, lon);
 		JSONObject json = new JSONObject();
-		json.put("id", user.getId());
-		json.put("name", user.getName());
-		json.put("email", user.getEmail());
-		json.put("pass", user.getPass());
-		json.put("lat", user.getLat());
-		json.put("long", user.getLon());
+		json.put("id", id);
+		json.put("palceid", id2);
+		json.put("lat", lat);
+		json.put("long",lon);
+
+		return json.toJSONString();
+	}
+	@POST
+	@Path("/like")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String Like(@FormParam("id") int  idcheckin,
+			@FormParam("lat") int myid) throws SQLException {
+		int id2 = UserModel.Like(idcheckin,myid);
+		JSONObject json = new JSONObject();
+		json.put("id", myid);
+		
+
+		return json.toJSONString();
+	}
+	
+	@POST
+	@Path("/comment")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String Comment(@FormParam("id") int  myid,
+			@FormParam("lat") int checkinid, @FormParam("long") String comment) throws SQLException {
+		int id2 = UserModel.comment(myid, checkinid, comment);
+		JSONObject json = new JSONObject();
+		json.put("id", myid);
+		json.put("comment", comment);
+		
 
 		return json.toJSONString();
 	}

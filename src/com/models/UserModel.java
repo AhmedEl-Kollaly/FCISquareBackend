@@ -299,7 +299,7 @@ public void setPrem(String prem) {
 	this.prem = prem;
 }
 
-public static UserModel getPlaces(int id1,String lat, String lon) 
+public  static int  getPlaces(int id1,String lat, String lon) throws SQLException 
 {
 	double ladouble=Double.parseDouble(lat);
 	double londouble=Double.parseDouble(lon);
@@ -338,44 +338,182 @@ public static UserModel getPlaces(int id1,String lat, String lon)
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				try{
-				Connection conn = DBConnection.getActiveConnection();
-				String sql = "UPDATE `places` SET `numofcheckins`=numofcheckins+1 WHERE  `id`=?";
-				PreparedStatement stmt;
-				stmt = conn.prepareStatement(sql);
-				stmt.setInt(1, minid);
-				ResultSet rs = stmt.executeQuery();
+			updatenumofcheckins(minid);
+			insertintocheckins(minid,id1);
 				
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				 
 				
-				try{
-					Connection conn = DBConnection.getActiveConnection();
-					String sql = "INSERT INTO `checkin`(`place_id`, `user_id`) VALUES (?,?)";
-					PreparedStatement stmt;
-					stmt = conn.prepareStatement(sql);
-					stmt.setInt(1, minid);
-					stmt.setInt(1, id1);
-					ResultSet rs = stmt.executeQuery();
-					UserModel user = new UserModel();
-					user.id = rs.getInt(1);
-					user.email = rs.getString("email");
-					user.pass = rs.getString("password");
-					user.name = rs.getString("name");
-					user.lat = rs.getDouble("lat");
-					user.lon = rs.getDouble("long");
-					return user;
-					}
-				catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}	 
-	return null;
+	return minid;
 
 
 }
 
+private static void insertintocheckins(int minid, int id1) {
+	// TODO Auto-generated method stub
+	try{
+		Connection conn = DBConnection.getActiveConnection();
+		//String sql = "insert into checkin(place_id, user_id)"+" values (?,?)";
+		String sql = "INSERT INTO `checkin`(`place_id`, `user_id`) VALUES ("+minid+","+id1+")";
+		java.sql.Statement stmt=conn.createStatement();
+	//	
+		
+		
+		      
+		
+		      stmt.executeUpdate(sql);
+		
+		
+		      
+		
+		stmt.close();
+		conn.close();
+		
+		
+		
+		
+	
+		
+		}
+	catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 
+		
+	
 }
+
+private static void updatenumofcheckins(int minid) throws SQLException {
+	// TODO Auto-generated method stub
+	int noofcheckins = 0;
+//	try {
+//		Connection conn = DBConnection.getActiveConnection();
+//		String sql = "Select * from places  WHERE  id="+minid+"";
+//		PreparedStatement stmt;
+//		stmt = conn.prepareStatement(sql);
+//
+//		ResultSet rs = stmt.executeQuery();
+//		ArrayList<UserModel> following = new  ArrayList<>();
+//		int i=0;
+//		while(rs.next()) 
+//		{
+//			noofcheckins = rs.getInt("numofcheckins");
+//				
+//		}
+//		//System.out.println(noofcheckins);
+//	
+//	}
+//	catch (SQLException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	}	
+	noofcheckins++;
+	try{
+		
+		Connection conn = DBConnection.getActiveConnection();
+		
+		//String sql = "UPDATE places SET numofcheckins=3  WHERE  id=2";
+		String sql = "UPDATE `places` SET `numofcheckins`=`numofcheckins`+1 WHERE id="+minid+"";
+		
+		
+		java.sql.Statement stmt2=conn.createStatement();
+	//	
+		
+		
+		      
+		
+		      stmt2.executeUpdate(sql);
+		
+		
+		      
+		
+		stmt2.close();
+	
+		
+		
+		
+		
+		conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+public static int Like(int idcheckin, int myid2) 
+{
+	try{
+		Connection conn = DBConnection.getActiveConnection();
+		//String sql = "insert into checkin(place_id, user_id)"+" values (?,?)";
+		String sql = "INSERT INTO `likes`(`checkinid`, `myid`) VALUES ("+idcheckin+","+myid2+")";
+		java.sql.Statement stmt=conn.createStatement();
+	//	
+		
+		
+		      
+		
+		      stmt.executeUpdate(sql);
+		
+		
+		      
+		
+		stmt.close();
+		conn.close();
+		
+		
+		
+		
+	
+		
+		}
+	catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+
+		
+	
+	return 0;
+}
+
+public static int comment(int myid, int checkinid, String comment) {
+	// TODO Auto-generated method stub
+	
+	try{
+		Connection conn = DBConnection.getActiveConnection();
+		
+		String sql = "INSERT INTO `comments`( `myid`,`checkinid`) VALUES ("+myid+","+checkinid+")";
+		java.sql.Statement stmt=conn.createStatement();
+	//	
+		
+		
+		      
+		
+		      stmt.executeUpdate(sql);
+		
+		
+		      
+		
+		stmt.close();
+		conn.close();
+		
+		
+		
+		
+	
+		
+		}
+	catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	
+	
+	return 0;
+}
+}
+
+
+
+
