@@ -483,7 +483,8 @@ public static int comment(int myid, int checkinid, String comment) {
 	try{
 		Connection conn = DBConnection.getActiveConnection();
 		
-		String sql = "INSERT INTO `comments`( `myid`,`checkinid`) VALUES ("+myid+","+checkinid+")";
+		String sql = "INSERT INTO `comments`(`checkinid`, `myid`,`comment`) VALUES ("+checkinid+","+myid+",'"+comment+"')";
+		
 		java.sql.Statement stmt=conn.createStatement();
 	//	
 		

@@ -69,6 +69,7 @@ public class Services {
 		int id2 = UserModel.comment(myid, checkinid, comment);
 		JSONObject json = new JSONObject();
 		json.put("id", myid);
+		json.put("checkid", checkinid);
 		json.put("comment", comment);
 		
 
