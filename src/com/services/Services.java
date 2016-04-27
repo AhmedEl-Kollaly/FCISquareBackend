@@ -350,4 +350,45 @@ public class Services {
 	  
 	   return json.toJSONString();
    }
+    @POST
+   @Path("/activitylist")
+	@Produces(MediaType.TEXT_PLAIN)
+   public String activitylist(@FormParam("id") int id)
+   {
+	   ArrayList<Likes> likes= new ArrayList<Likes>(UserModel.activitylistlikes(id));
+	   ArrayList<comments> comments= new ArrayList<comments>(UserModel.activitylistcomments(id));
+	   JSONObject json = new JSONObject();
+	   for(int i= 0 ;i<likes.size();++i)
+	   {
+
+		   json.put("Like_id"+i+": ", likes.get(i).getLikeID());
+		   json.put("Check_in_id"+i+": ", likes.get(i).getCheckinID());
+	   }
+	   for(int i= 0 ;i<comments.size();++i)
+	   {
+
+		   json.put("comment_id"+i+": ", comments.get(i).getCommentID());
+		   json.put("Check_in_id"+i+": ", likes.get(i).getCheckinID());
+	   }
+	  
+	   return json.toJSONString();
+   }
+   @POST
+	@Path("/undolike")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String deletelike(@FormParam("id") String id) {
+		Boolean status = UserModel.deletelike(Integer.parseInt(id));
+		JSONObject json = new JSONObject();
+		json.put("status", status ? 1 : 0);
+		return json.toJSONString();
+	}
+   @POST
+	@Path("/undocomment")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String deletecomment(@FormParam("id") String id) {
+		Boolean status = UserModel.deletecomment(Integer.parseInt(id));
+		JSONObject json = new JSONObject();
+		json.put("status", status ? 1 : 0);
+		return json.toJSONString();
+	}
 }
