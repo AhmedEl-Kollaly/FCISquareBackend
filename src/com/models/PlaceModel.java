@@ -6,7 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.beans.Statement;
+
+
+
+//import java.beans.Statement;
 import com.mysql.jdbc.Statement;
 
 public class PlaceModel 
@@ -18,6 +21,7 @@ public class PlaceModel
 	private int numberofcheckins;
 	private int numrate;
 	private int ratebefavg;
+	private int id;
 	private Tips [] tip;
 	PlaceModel()
 	{
@@ -77,7 +81,7 @@ public class PlaceModel
 			Connection conn = DBConnection.getActiveConnection();
 			String sql = "Insert into places (`name`,`rate`,`lat`,`lon`,`numofcheckins`) VALUES  (?,?,?,?,?)";
 			PreparedStatement stmt;
-			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			stmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, name);
 			stmt.setInt(2, rate);
 			stmt.setDouble(3, lat);
@@ -129,7 +133,7 @@ public class PlaceModel
 	public static boolean saveplace(int userid,String placename) throws SQLException
 	{
 		try{
-		int placeid;
+		int placeid =-1;
 		Connection connn = DBConnection.getActiveConnection();
 		String sqll = "Select * from places where `name` = ?";
 		PreparedStatement stmtt;
@@ -154,5 +158,31 @@ public class PlaceModel
 		{
 			return false;
 		}
+	}
+	public static PlaceModel getPlace(int id){
+		// TODO Auto-generated method stub
+				try {
+					Connection conn = DBConnection.getActiveConnection();
+					String sql = "Select * from places where `id` = ?";
+					PreparedStatement stmt;
+					stmt = conn.prepareStatement(sql);
+					stmt.setInt(1, id);
+					ResultSet rs = stmt.executeQuery();
+					
+					if (rs.next()) {
+						PlaceModel place = new PlaceModel();
+						place.id = rs.getInt(1);
+						place.latitude = rs.getDouble("lat");
+						place.longitude = rs.getDouble("long");
+						place.name = rs.getString("name");
+						place.numberofcheckins = rs.getInt("numofcheckins");
+						
+						return place;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return null;
 	}
 }
