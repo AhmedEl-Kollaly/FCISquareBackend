@@ -758,6 +758,87 @@ public static ArrayList<ArrayList<PlaceModel>> sortHomePageByRate(int id){
 }
 	return homePage;
 }
+public static ArrayList<Likes> activitylistlikes(int id)
+{
+	ArrayList<Likes> likes=new ArrayList<Likes>();
+	Likes l=new Likes();
+	try {
+		Connection conn = DBConnection.getActiveConnection();
+		String sql = "Select * from likes where `myid` = ?";
+		PreparedStatement stmt;
+		stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, id);
+		ResultSet rs = stmt.executeQuery();
+		ArrayList<UserModel> following = new  ArrayList<>();
+		while(rs.next()) 
+		{
+			l.setLikeID(rs.getInt("id"));
+			l.setCheckinID(rs.getInt("checkinid"));
+			likes.add(l);
+		}
+		return likes;
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return null;
+}
+public static ArrayList<comments> activitylistcomments(int id)
+{
+	ArrayList<comments> comments=new ArrayList<comments>();
+	comments c=new comments();
+	try {
+		Connection conn = DBConnection.getActiveConnection();
+		String sql = "Select * from comments where `myid` = ?";
+		PreparedStatement stmt;
+		stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, id);
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) 
+		{
+			c.setCommentID(rs.getInt("id"));
+			c.setCheckinID(rs.getInt("checkinid"));
+			comments.add(c);
+		}
+		return comments;
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return null;
+}
+public static boolean deletelike(int likeid)
+{
+	try {
+		Connection conn = DBConnection.getActiveConnection();
+		String sql = "DELETE FROM  `likes` WHERE `id` =?";
+		PreparedStatement stmt;
+		stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		stmt.setInt(1, likeid);
+		stmt.executeUpdate();
+		return true;
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return false;
+}
+public static boolean deletecomment(int commentid)
+{
+	try {
+		Connection conn = DBConnection.getActiveConnection();
+		String sql = "DELETE FROM  `comments` WHERE `id` =?";
+		PreparedStatement stmt;
+		stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		stmt.setInt(1, commentid);
+		stmt.executeUpdate();
+		return true;
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return false;
+}
 private static void insertintocheckins(int minid, int id1) {
 	// TODO Auto-generated method stub
 	try{
