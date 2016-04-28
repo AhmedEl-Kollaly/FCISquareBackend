@@ -79,7 +79,7 @@ public class PlaceModel
 		if(premium.equals("yes"))
 		{
 			Connection conn = DBConnection.getActiveConnection();
-			String sql = "Insert into places (`name`,`rate`,`lat`,`lon`,`numofcheckins`) VALUES  (?,?,?,?,?)";
+			String sql = "Insert into places (`name`,`rate`,`lat`,`long`,`numofcheckins`) VALUES  (?,?,?,?,?)";
 			PreparedStatement stmt;
 			stmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, name);
