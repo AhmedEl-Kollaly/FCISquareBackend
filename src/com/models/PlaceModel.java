@@ -159,6 +159,9 @@ public class PlaceModel
 			return false;
 		}
 	}
+	public  void setNumberofcheckins(int num){
+		numberofcheckins = num;
+	}
 	public static PlaceModel getPlace(int id){
 		// TODO Auto-generated method stub
 				try {

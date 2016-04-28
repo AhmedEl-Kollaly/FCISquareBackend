@@ -20,9 +20,13 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 
+
+
 import com.models.DBConnection;
+import com.models.Likes;
 import com.models.PlaceModel;
 import com.models.UserModel;
+import com.models.comments;
 
 @Path("/")
 public class Services {
@@ -389,6 +393,32 @@ public class Services {
 		Boolean status = UserModel.deletecomment(Integer.parseInt(id));
 		JSONObject json = new JSONObject();
 		json.put("status", status ? 1 : 0);
+		return json.toJSONString();
+	}
+   @POST
+	@Path("/notifications")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String getAllNotifications(@FormParam("id") int id) {
+		ArrayList<String> notifications = new ArrayList<String>(
+				UserModel.getLikesNotification(id));
+		JSONObject json = new JSONObject();
+		for (int i = 0; i < notifications.size(); ++i) {
+
+			json.put(i, notifications.get(i));
+		}
+
+		return json.toJSONString();
+	}
+
+	@POST
+	@Path("/showPost")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String RespondToNotification(@FormParam("user_id") int user_id,
+			@FormParam("checkin_id") int checkin_id) {
+		String post = UserModel.showPost(user_id, checkin_id);
+		JSONObject json = new JSONObject();
+		json.put(0, post);
+
 		return json.toJSONString();
 	}
 }
