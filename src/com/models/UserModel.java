@@ -380,6 +380,8 @@ public class UserModel {
 				stmt.setInt(1, temp.get(i));
 				ResultSet rs = stmt.executeQuery();
 				if (rs.next()) {
+					PlaceModel pl=new PlaceModel();
+					places.add(pl);
 					places.get(i).setName(rs.getString("name"));
 					places.get(i).setLatitude(rs.getDouble("lat"));
 					places.get(i).setLongitude(rs.getDouble("long"));

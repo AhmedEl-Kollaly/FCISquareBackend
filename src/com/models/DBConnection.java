@@ -15,10 +15,10 @@ public class DBConnection {
 			
 		
 			Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager
+/*			connection = DriverManager
 					.getConnection("jdbc:mysql://127.9.25.130:3306/firstapp?"
 							+ "user=admin6SCMghN&password=jW1f8BU3jtPN&characterEncoding=utf8");
-		//	connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/firstapp", "root", "");
+		//	*/connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/firstapp", "root", "");
 			return connection;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
