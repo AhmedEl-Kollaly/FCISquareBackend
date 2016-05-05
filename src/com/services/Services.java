@@ -174,7 +174,7 @@ public class Services {
 			@FormParam("lat") String lat, @FormParam("long") String lon) {
 		Boolean status = UserModel.updateUserPosition(Integer.parseInt(id), Double.parseDouble(lat), Double.parseDouble(lon));
 		JSONObject json = new JSONObject();
-		json.put("status", status ? 1 : 0);
+		json.put("status", status ? true : false);
 		return json.toJSONString();
 	}
 	@POST
