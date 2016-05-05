@@ -266,7 +266,28 @@ public class UserModel {
 
 		return null;
 	}
+	public static int getnumofusercheckins(int id)
+	{
+		try {
+			Connection conn = DBConnection.getActiveConnection();
+			String sql = "Select id from checkin where `user_id` = ?";
+			PreparedStatement stmt;
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt("user_id", id);
+			ResultSet rs = stmt.executeQuery();
+			ArrayList<Integer> numofcheckins=new ArrayList<Integer>();
+			while (rs.next()) {
+				numofcheckins.add(rs.getInt("id"));
+			}
+			
+			return numofcheckins.size();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
+		return null;
+	}
 	public static ArrayList<UserModel> getFollowingList(int id) {
 
 		// TODO Auto-generated method stub
