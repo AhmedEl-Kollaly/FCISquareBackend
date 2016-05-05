@@ -273,7 +273,7 @@ public class UserModel {
 			String sql = "Select id from checkin where `user_id` = ?";
 			PreparedStatement stmt;
 			stmt = conn.prepareStatement(sql);
-			stmt.setInt("user_id", id);
+			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();
 			ArrayList<Integer> numofcheckins=new ArrayList<Integer>();
 			while (rs.next()) {
@@ -286,7 +286,7 @@ public class UserModel {
 			e.printStackTrace();
 		}
 
-		return null;
+		return -1;
 	}
 	public static ArrayList<UserModel> getFollowingList(int id) {
 
