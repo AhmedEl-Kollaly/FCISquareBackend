@@ -142,6 +142,8 @@ public class Services {
 			@FormParam("pass") String pass) {
 		UserModel user = UserModel.login(email, pass);
 		JSONObject json = new JSONObject();
+		ArrayList<UserModel> following = new ArrayList<>();
+		ArrayList<UserModel> followers = new ArrayList<>();
 		if(user!=null)
 		{
 			
@@ -152,6 +154,10 @@ public class Services {
 		json.put("lat", user.getLat());
 		json.put("long", user.getLon());
 		json.put("prem", user.getPrem());
+		following=user.getFollowingList(user.getId());
+		followers=user.getFollowersList(user.getId());
+		json.put("following", following.size());
+		json.put("followers", followers.size());
 		return json.toJSONString();
 		}
 		else
