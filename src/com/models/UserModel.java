@@ -291,7 +291,30 @@ public class UserModel {
 		return null;
 
 	}
+	public static ArrayList<UserModel> getFollowersList(int id) {
 
+		// TODO Auto-generated method stub
+		try {
+			Connection conn = DBConnection.getActiveConnection();
+			String sql = "Select * from follow where `id2` = "+id+"";
+			PreparedStatement stmt;
+			stmt = conn.prepareStatement(sql);
+			
+			ResultSet rs = stmt.executeQuery();
+			ArrayList<UserModel> followers = new ArrayList<>();
+			while (rs.next()) {
+
+				followers.add(getUserInfo(rs.getInt("id1")));
+			}
+			return followers;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+
+	}
 	public String getPrem() {
 		return prem;
 	}
