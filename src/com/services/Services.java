@@ -158,6 +158,7 @@ public class Services {
 		followers=user.getFollowersList(user.getId());
 		json.put("following", following.size());
 		json.put("followers", followers.size());
+		json.put("numofcheckins",user.getnumofusercheckins(user.getId));
 		return json.toJSONString();
 		}
 		else
