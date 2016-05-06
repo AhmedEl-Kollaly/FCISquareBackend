@@ -85,7 +85,7 @@ public class Services {
 	@POST
 	@Path("/signup")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String signUp(@FormParam("name") String name,
+	public String signUp(@FormParam("uname") String name,
 			@FormParam("email") String email, @FormParam("pass") String pass, 
 			   @FormParam("question") String question, @FormParam("answer") String answer,
 			      @FormParam("prem") String prem) {
