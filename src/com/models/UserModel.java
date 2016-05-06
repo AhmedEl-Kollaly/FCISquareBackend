@@ -344,7 +344,7 @@ public class UserModel {
 		this.prem = prem;
 	}
 
-	public static int getPlaces(int id1, String lat, String lon)
+	public static int getPlaces(int id1, String lat, String lon,String status)
 			throws SQLException {
 		double ladouble = Double.parseDouble(lat);
 		double londouble = Double.parseDouble(lon);
@@ -382,7 +382,7 @@ public class UserModel {
 			e.printStackTrace();
 		}
 		updatenumofcheckins(minid);
-		insertintocheckins(minid, id1);
+		insertintocheckins(minid, id1,status);
 
 		return minid;
 
@@ -1005,14 +1005,14 @@ public class UserModel {
 		return false;
 	}
 
-	private static void insertintocheckins(int minid, int id1) {
+	private static void insertintocheckins(int minid, int id1, String status) {
 		// TODO Auto-generated method stub
 		try {
 			Connection conn = DBConnection.getActiveConnection();
 			// String sql =
 			// "insert into checkin(place_id, user_id)"+" values (?,?)";
-			String sql = "INSERT INTO `checkin`(`place_id`, `user_id`) VALUES ("
-					+ minid + "," + id1 + ")";
+			String sql = "INSERT INTO `checkin`(`place_id`, `user_id`,`status`) VALUES ("
+					+ minid + "," + id1 +",'"+status+"' )";
 			java.sql.Statement stmt = conn.createStatement();
 			//
 

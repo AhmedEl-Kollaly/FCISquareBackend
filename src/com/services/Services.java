@@ -42,9 +42,10 @@ public class Services {
 	@POST
 	@Path("/checkin")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String checkin(@FormParam("id") int  id,
-			@FormParam("lat") String lat, @FormParam("long") String lon) throws SQLException {
-		int id2 = UserModel.getPlaces(id, lat, lon);
+	public String checkin(@FormParam("id") String  id,
+			@FormParam("lat") String lat, @FormParam("long") String lon,@FormParam("status") String status) throws SQLException {
+		int id1=Integer.getInteger(id);
+		int id2 = UserModel.getPlaces(id1, lat, lon,status);
 		JSONObject json = new JSONObject();
 		json.put("id", id);
 		json.put("palceid", id2);
