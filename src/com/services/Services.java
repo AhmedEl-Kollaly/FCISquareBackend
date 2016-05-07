@@ -147,7 +147,7 @@ public class Services {
 		ArrayList<UserModel> followers = new ArrayList<>();
 		if(user!=null)
 		{
-			
+		int numFollowers = 0 , numFollowing = 0;
 		json.put("id", user.getId());
 		json.put("name", user.getName());
 		json.put("email", user.getEmail());
@@ -157,9 +157,11 @@ public class Services {
 		json.put("prem", user.getPrem());
 		following=user.getFollowingList(user.getId());
 		followers=user.getFollowersList(user.getId());
-		json.put("following", following.size());
-		json.put("followers", followers.size());
-		json.put("numofcheckins",user.getnumofusercheckins(user.getId()));
+		numFollowing = following.size();
+		numFollowers = followers.size();
+		json.put("following", Integer.toString(numFollowing));
+		json.put("followers", Integer.toString(numFollowers));
+		json.put("numofcheckins",Integer.toString(user.getnumofusercheckins(user.getId())));
 		return json.toJSONString();
 		}
 		else
