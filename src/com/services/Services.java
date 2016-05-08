@@ -44,7 +44,7 @@ public class Services {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String checkin(@FormParam("id") String  id,
 			@FormParam("lat") String lat, @FormParam("long") String lon,@FormParam("status") String status) throws SQLException {
-		int id1=Integer.getInteger(id);
+	int id1=Integer.parseInt(id);
 		int id2 = UserModel.getPlaces(id1, lat, lon,status);
 		JSONObject json = new JSONObject();
 		json.put("id", id);
