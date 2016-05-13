@@ -2,23 +2,27 @@
 <testng-results skipped="0" failed="0" total="3" passed="3">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="52" started-at="2016-05-13T17:46:06Z" finished-at="2016-05-13T17:46:06Z">
+  <suite name="Default suite" duration-ms="64" started-at="2016-05-13T18:01:34Z" finished-at="2016-05-13T18:01:34Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="52" started-at="2016-05-13T17:46:06Z" finished-at="2016-05-13T17:46:06Z">
+    <test name="Default test" duration-ms="64" started-at="2016-05-13T18:01:34Z" finished-at="2016-05-13T18:01:34Z">
       <class name="com.services.UserFunctionsTest">
-        <test-method status="PASS" signature="testGetPass()[pri:0, instance:com.services.UserFunctionsTest@2b98378d]" name="testGetPass" duration-ms="16" started-at="2016-05-13T20:46:06Z" finished-at="2016-05-13T20:46:06Z">
+        <test-method status="PASS" signature="set()[pri:0, instance:com.services.UserFunctionsTest@59fa1d9b]" name="set" is-config="true" duration-ms="15" started-at="2016-05-13T21:01:34Z" finished-at="2016-05-13T21:01:34Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testGetPass -->
-        <test-method status="PASS" signature="testGetUser()[pri:0, instance:com.services.UserFunctionsTest@2b98378d]" name="testGetUser" duration-ms="2" started-at="2016-05-13T20:46:06Z" finished-at="2016-05-13T20:46:06Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testGetUser -->
-        <test-method status="PASS" signature="testSearchUser()[pri:0, instance:com.services.UserFunctionsTest@2b98378d]" name="testSearchUser" duration-ms="2" started-at="2016-05-13T20:46:06Z" finished-at="2016-05-13T20:46:06Z">
+        </test-method> <!-- set -->
+        <test-method status="PASS" signature="testSearchUser()[pri:0, instance:com.services.UserFunctionsTest@59fa1d9b]" name="testSearchUser" duration-ms="13" started-at="2016-05-13T21:01:34Z" finished-at="2016-05-13T21:01:34Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testSearchUser -->
+        <test-method status="PASS" signature="testGetUser()[pri:0, instance:com.services.UserFunctionsTest@59fa1d9b]" name="testGetUser" duration-ms="2" started-at="2016-05-13T21:01:34Z" finished-at="2016-05-13T21:01:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetUser -->
+        <test-method status="PASS" signature="testGetPass()[pri:0, instance:com.services.UserFunctionsTest@59fa1d9b]" name="testGetPass" duration-ms="2" started-at="2016-05-13T21:01:34Z" depends-on-methods="com.services.UserFunctionsTest.testSearchUser" finished-at="2016-05-13T21:01:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetPass -->
       </class> <!-- com.services.UserFunctionsTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
