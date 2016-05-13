@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="3" passed="3">
+<testng-results skipped="0" failed="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="1278" started-at="2016-05-05T20:39:45Z" finished-at="2016-05-05T20:39:46Z">
+  <suite name="Default suite" duration-ms="50" started-at="2016-05-13T17:35:11Z" finished-at="2016-05-13T17:35:11Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="1278" started-at="2016-05-05T20:39:45Z" finished-at="2016-05-05T20:39:46Z">
-      <class name="com.services.UserEntityTest">
-        <test-method status="PASS" signature="testLogin()[pri:1, instance:com.services.UserEntityTest@46d56d67]" name="testLogin" duration-ms="651" started-at="2016-05-05T23:39:45Z" finished-at="2016-05-05T23:39:46Z">
+    <test name="Default test" duration-ms="50" started-at="2016-05-13T17:35:11Z" finished-at="2016-05-13T17:35:11Z">
+      <class name="com.services.UserFunctionsTest">
+        <test-method status="PASS" signature="testGetUser()[pri:0, instance:com.services.UserFunctionsTest@2b98378d]" name="testGetUser" duration-ms="18" started-at="2016-05-13T20:35:11Z" finished-at="2016-05-13T20:35:11Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testLogin -->
-        <test-method status="PASS" signature="testgetLastPosition()[pri:2, instance:com.services.UserEntityTest@46d56d67]" name="testgetLastPosition" duration-ms="375" started-at="2016-05-05T23:39:46Z" finished-at="2016-05-05T23:39:46Z">
+        </test-method> <!-- testGetUser -->
+        <test-method status="PASS" signature="testSearchUser()[pri:0, instance:com.services.UserFunctionsTest@2b98378d]" name="testSearchUser" duration-ms="2" started-at="2016-05-13T20:35:11Z" finished-at="2016-05-13T20:35:11Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testgetLastPosition -->
-        <test-method status="PASS" signature="testUpdatePosition()[pri:3, instance:com.services.UserEntityTest@46d56d67]" name="testUpdatePosition" duration-ms="229" started-at="2016-05-05T23:39:46Z" finished-at="2016-05-05T23:39:46Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testUpdatePosition -->
-      </class> <!-- com.services.UserEntityTest -->
+        </test-method> <!-- testSearchUser -->
+      </class> <!-- com.services.UserFunctionsTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

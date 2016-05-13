@@ -70,7 +70,17 @@ public class UserModel {
 	public void setLon(Double lon) {
 		this.lon = lon;
 	}
-
+	public boolean getUser(String name,String pass){
+		if(this.name.equals(name) && this.pass.equals(pass))
+			return true;
+		
+		return false;
+	}
+	public boolean searchUser(String name){
+		if(this.name.equals(name))
+			return true;
+		return false;
+	}
 	public static UserModel getUserInfo(int id) {
 		try {
 			Connection conn = DBConnection.getActiveConnection();

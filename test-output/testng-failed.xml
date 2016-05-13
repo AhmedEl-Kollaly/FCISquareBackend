@@ -5,7 +5,7 @@
     <classes>
       <class name="com.services.UserEntityTest">
         <methods>
-          <include name="testgetLastPosition"/>
+          <include name="testLogin"/>
         </methods>
       </class> <!-- com.services.UserEntityTest -->
     </classes>
