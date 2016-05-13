@@ -21,5 +21,12 @@ public class UserFunctionsTest {
 	  boolean found =user.searchUser("ahmed");
 	  Assert.assertEquals(found ,true);
   }
+  @Test
+  public void testGetPass() {
+	  user.setName("ahmed");
+	  user.setPass("123");
+	  String str = user.getPass();
+	  Assert.assertEquals(str ,"123");
+  }
   
 }
